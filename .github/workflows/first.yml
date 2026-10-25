@@ -18,3 +18,14 @@ jobs:
 
       - name: Show repository name
         run: echo "My repository is $GITHUB_REPOSITORY"
+
+      - name: Check secret
+        env:
+          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
+        run: |
+          if [ -n "$DEMO_SECRET" ]; then
+            echo "Secret is configured."
+          else
+            echo "Secret is missing."
+            exit 1
+          fi
